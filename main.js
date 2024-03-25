@@ -80,11 +80,18 @@ const allLikeBtn = document.querySelectorAll('.js-like-button');
 const allLikeCounter = document.querySelectorAll('.js-likes-counter');
 const likedIdArray = [];
 allLikeBtn.forEach((likeBtn, index) => {
+    const thisLikeCounter = allLikeCounter[index];
     likeBtn.addEventListener('click', function () {
-        likeBtn.classList.add('like-button--liked');
-        const thisLikeCounter = allLikeCounter[index];
-        parseInt(thisLikeCounter.textContent++);
-        likedIdArray.push(posts[index].id);
+        if (likedIdArray.includes(posts[index].id)) {
+            likeBtn.classList.remove('like-button--liked');
+            parseInt(thisLikeCounter.textContent--);
+            likedIdArray.splice(likedIdArray.indexOf(posts[index].id));
+        } else {
+            likeBtn.classList.add('like-button--liked');
+            parseInt(thisLikeCounter.textContent++);
+            likedIdArray.push(posts[index].id);
+        }
+        console.log(likedIdArray);
     });
 });
 
