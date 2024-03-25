@@ -9,6 +9,8 @@
 
 // Creo un array con split per la chiave created
 // Decoscruisto l'array e inserisco le constanti nel formato corretto
+// Attraverso un operatore ternario gestisco l'immagine profilo
+// Se author.image esiste stampo l'immagine altrimenti aggiungo la classe 'profile-pic-default'
 */
 
 const posts = [
@@ -71,8 +73,7 @@ const posts = [
 
 const postsContainer = document.querySelector('#container');
 posts.forEach((post) => {
-    const newPost = generatePost(post);
-    postsContainer.innerHTML += newPost;
+    postsContainer.innerHTML += generatePost(post);
 });
 
 const allLikeBtn = document.querySelectorAll('.js-like-button');
@@ -100,7 +101,7 @@ function generatePost(post) {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="${author.image}" alt="Phil Mangione">                    
+                        ${setProfilePic(author.image)}                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${author.name}</div>
@@ -128,4 +129,12 @@ function generatePost(post) {
         </div>
     `;
     return newPost;
+}
+
+// Funzione che gestisce l'immagine del profilo
+// image: chiave dell'oggetto author
+// return: profilePic elemento del dom che rappresenta l'immagine del profilo
+function setProfilePic(authorImage) {
+    const profilePic = authorImage ? `<img class="profile-pic" src="${authorImage}" alt="Phil Mangione">` : `<span class="profile-pic-default">LF</span>`;
+    return profilePic;
 }
