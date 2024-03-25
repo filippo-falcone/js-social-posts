@@ -81,11 +81,12 @@ const allLikeCounter = document.querySelectorAll('.js-likes-counter');
 const likedIdArray = [];
 allLikeBtn.forEach((likeBtn, index) => {
     const thisLikeCounter = allLikeCounter[index];
-    likeBtn.addEventListener('click', function () {
+    likeBtn.addEventListener('click', function (event) {
+        event.preventDefault()
         if (likedIdArray.includes(posts[index].id)) {
             likeBtn.classList.remove('like-button--liked');
             parseInt(thisLikeCounter.textContent--);
-            likedIdArray.splice(likedIdArray.indexOf(posts[index].id));
+            likedIdArray.splice(likedIdArray.indexOf(posts[index].id), 1);
         } else {
             likeBtn.classList.add('like-button--liked');
             parseInt(thisLikeCounter.textContent++);
