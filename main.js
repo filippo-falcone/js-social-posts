@@ -91,7 +91,6 @@ allLikeBtn.forEach((likeBtn, index) => {
             parseInt(thisLikeCounter.textContent++);
             likedIdArray.push(posts[index].id);
         }
-        console.log(likedIdArray);
     });
 });
 
