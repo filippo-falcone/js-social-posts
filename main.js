@@ -4,6 +4,11 @@
 // Richiamo tutti gli elementi del dom con classe 'js-like-button' e tutti quelli con la classe 'js-likes-counter'
 // Per ogni post aggiungo la classe 'like-button--liked' e incremento il counter like di 1
 // Salvo il contenuto della chiave id in un array vuoto
+
+// BONUS
+
+// Creo un array con split per la chiave created
+// Decoscruisto l'array e inserisco le constanti nel formato corretto
 */
 
 const posts = [
@@ -81,13 +86,15 @@ allLikeBtn.forEach((likeBtn, index) => {
         likedIdArray.push(posts[index].id);
     });
 });
-console.log(likedIdArray);
+
 /* FUCTIONS */
 // Funzione che genera i post
 // post: elemento che rappresenta l'oggetto
 // return: elemento del dom che rappresenta un post
 function generatePost(post) {
     const { id, content, media, author, likes, created } = post;
+    const createdArray = created.split('-');
+    const [year, month, day] = createdArray;
     const newPost = `
         <div class="post">
             <div class="post__header">
@@ -97,7 +104,7 @@ function generatePost(post) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${author.name}</div>
-                        <div class="post-meta__time">${created}</div>
+                        <div class="post-meta__time">${day}-${month}-${year}</div>
                     </div>                    
                 </div>
             </div>
