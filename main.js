@@ -1,3 +1,8 @@
+/*
+// Creo una funzione che genera i post e la richiamo in un ciclo forEach
+// Cambio i valori della funzione con le chiavi del mio array di dati
+*/
+/* MATERIALS */
 const posts = [
     {
         "id": 1,
@@ -55,3 +60,51 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+const postsContainer = document.querySelector('#container');
+
+/* BODY */
+posts.forEach((post) => {
+    const newPost = generatePost(post);
+    postsContainer.innerHTML += newPost;
+});
+
+/* FUCTIONS */
+// Funzione che genera i post
+// post: elemento che rappresenta l'oggetto
+// return: elemento del dom che rappresenta un post
+function generatePost(post) {
+    const { id, content, media, author, likes, created } = post;
+    const newPost = `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${author.image}" alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${author.name}</div>
+                        <div class="post-meta__time">${created}</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${content}</div>
+            <div class="post__image">
+                <img src="${media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button js-like-button" href="#" data-postid="${id}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+    `;
+    return newPost;
+}
