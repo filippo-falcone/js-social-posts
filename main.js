@@ -1,8 +1,11 @@
 /*
 // Creo una funzione che genera i post e la richiamo in un ciclo forEach
 // Cambio i valori della funzione con le chiavi del mio array di dati
+// Richiamo tutti gli elementi del dom con classe 'js-like-button' e tutti quelli con la classe 'js-likes-counter'
+// Per ogni post aggiungo la classe 'like-button--liked' e incremento il counter like di 1
+// Salvo il contenuto della chiave id in un array vuoto
 */
-/* MATERIALS */
+
 const posts = [
     {
         "id": 1,
@@ -60,14 +63,25 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-const postsContainer = document.querySelector('#container');
 
-/* BODY */
+const postsContainer = document.querySelector('#container');
 posts.forEach((post) => {
     const newPost = generatePost(post);
     postsContainer.innerHTML += newPost;
 });
 
+const allLikeBtn = document.querySelectorAll('.js-like-button');
+const allLikeCounter = document.querySelectorAll('.js-likes-counter');
+const likedIdArray = [];
+allLikeBtn.forEach((likeBtn, index) => {
+    likeBtn.addEventListener('click', function () {
+        likeBtn.classList.add('like-button--liked');
+        const thisLikeCounter = allLikeCounter[index];
+        parseInt(thisLikeCounter.textContent++);
+        likedIdArray.push(posts[index].id);
+    });
+});
+console.log(likedIdArray);
 /* FUCTIONS */
 // Funzione che genera i post
 // post: elemento che rappresenta l'oggetto
