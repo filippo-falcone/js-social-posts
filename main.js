@@ -80,6 +80,7 @@ const allLikeBtn = document.querySelectorAll('.js-like-button');
 const allLikeCounter = document.querySelectorAll('.js-likes-counter');
 const likedIdArray = [];
 increaseDecreaseLike(allLikeBtn, likedIdArray);
+
 /* FUCTIONS */
 // Funzione che genera i post
 // post: elemento che rappresenta l'oggetto
