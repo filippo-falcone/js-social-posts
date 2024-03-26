@@ -91,7 +91,7 @@ function generatePost(post) {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        ${setProfilePic(author.image)}                    
+                        ${setProfilePic(author)}                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${author.name}</div>
@@ -122,10 +122,12 @@ function generatePost(post) {
 }
 
 // Funzione che gestisce l'immagine del profilo
-// image: chiave dell'oggetto author
+// author: chiave dell'oggetto che rappresenta le info dell'autore
 // return: profilePic elemento del dom che rappresenta l'immagine del profilo
-function setProfilePic(authorImage) {
-    const profilePic = authorImage ? `<img class="profile-pic" src="${authorImage}" alt="Phil Mangione">` : `<span class="profile-pic-default">LF</span>`;
+function setProfilePic(author) {
+    const authorNameArray = author.name.split(" ");
+    const [name, lastName] = authorNameArray;
+    const profilePic = author.image ? `<img class="profile-pic" src="${author.image}" alt="${author.name}">` : `<span class="profile-pic-default">${name[0]}${lastName[0]}</span>`;
     return profilePic;
 }
 
