@@ -86,8 +86,6 @@ increaseDecreaseLike(allLikeBtn, likedIdArray);
 // return: elemento del dom che rappresenta un post
 function generatePost(post) {
     const { id, content, media, author, likes, created } = post;
-    const createdArray = created.split('-');
-    const [year, month, day] = createdArray;
     const newPost = `
         <div class="post">
             <div class="post__header">
@@ -97,7 +95,7 @@ function generatePost(post) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${author.name}</div>
-                        <div class="post-meta__time">${day}-${month}-${year}</div>
+                        <div class="post-meta__time">${convertDateToItalian(created)}</div>
                     </div>                    
                 </div>
             </div>
@@ -129,6 +127,16 @@ function generatePost(post) {
 function setProfilePic(authorImage) {
     const profilePic = authorImage ? `<img class="profile-pic" src="${authorImage}" alt="Phil Mangione">` : `<span class="profile-pic-default">LF</span>`;
     return profilePic;
+}
+
+// Funzione che converte la data originale in italiano
+// originalDate: elemento chiave di un oggetto che rappresenta la data orignale
+// return: italianDate: elemento stringa  che rappresenta la data in italiano
+function convertDateToItalian(originalDate) {
+    const originalDateArray = originalDate.split('-');
+    const [year, month, day] = originalDateArray;
+    const italianDate = `${day}-${month}-${year}`
+    return italianDate;
 }
 
 // Funzione che gestisce il click sull'elemento del dom
