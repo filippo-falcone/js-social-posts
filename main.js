@@ -79,22 +79,7 @@ posts.forEach((post) => {
 const allLikeBtn = document.querySelectorAll('.js-like-button');
 const allLikeCounter = document.querySelectorAll('.js-likes-counter');
 const likedIdArray = [];
-allLikeBtn.forEach((likeBtn, index) => {
-    const thisLikeCounter = allLikeCounter[index];
-    likeBtn.addEventListener('click', function (event) {
-        event.preventDefault()
-        if (likedIdArray.includes(posts[index].id)) {
-            likeBtn.classList.remove('like-button--liked');
-            parseInt(thisLikeCounter.textContent--);
-            likedIdArray.splice(likedIdArray.indexOf(posts[index].id), 1);
-        } else {
-            likeBtn.classList.add('like-button--liked');
-            parseInt(thisLikeCounter.textContent++);
-            likedIdArray.push(posts[index].id);
-        }
-    });
-});
-
+increaseDecreaseLike(allLikeBtn, likedIdArray);
 /* FUCTIONS */
 // Funzione che genera i post
 // post: elemento che rappresenta l'oggetto
@@ -144,4 +129,26 @@ function generatePost(post) {
 function setProfilePic(authorImage) {
     const profilePic = authorImage ? `<img class="profile-pic" src="${authorImage}" alt="Phil Mangione">` : `<span class="profile-pic-default">LF</span>`;
     return profilePic;
+}
+
+// Funzione che gestisce il click sull'elemento del dom
+// domElement: elemento del dom che rappresenta lèelemento cliccato
+// array: elemento di tipo array
+function increaseDecreaseLike(domElement, array) {
+    domElement.forEach((likeBtn, index) => {
+        const relatedLikeCounter = allLikeCounter[index];
+        likeBtn.addEventListener('click', function (event) {
+            event.preventDefault()
+            if (array.includes(posts[index].id)) {
+                this.classList.remove('like-button--liked');
+                parseInt(relatedLikeCounter.textContent--);
+                array.splice(array.indexOf(posts[index].id), 1);
+            } else {
+                this.classList.add('like-button--liked');
+                parseInt(relatedLikeCounter.textContent++);
+                array.push(posts[index].id);
+            }
+            console.log(array);
+        });
+    });
 }
