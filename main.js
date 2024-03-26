@@ -139,16 +139,16 @@ function increaseDecreaseLike(domElement, array) {
         const relatedLikeCounter = allLikeCounter[index];
         likeBtn.addEventListener('click', function (event) {
             event.preventDefault()
-            if (array.includes(posts[index].id)) {
+            let postId = parseInt(this.dataset.postid);
+            if (array.includes(postId)) {
                 this.classList.remove('like-button--liked');
                 parseInt(relatedLikeCounter.textContent--);
-                array.splice(array.indexOf(posts[index].id), 1);
+                array.splice(array.indexOf(postId), 1);
             } else {
                 this.classList.add('like-button--liked');
                 parseInt(relatedLikeCounter.textContent++);
-                array.push(posts[index].id);
+                array.push(postId);
             }
-            console.log(array);
         });
     });
 }
